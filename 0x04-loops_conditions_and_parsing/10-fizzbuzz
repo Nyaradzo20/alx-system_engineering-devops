@@ -1,13 +1,19 @@
 #!/usr/bin/env bash
 # Bash script that displays numbers from 1 to 100.
-for (( i=1; i < 101; i++ ))
+count=1
+while [ "$count" -lt 101 ]
 do
-    if (( i % 15 == 0 )); then
+    if [ $((count%15)) = 0 ]
+    then
         echo "FizzBuzz"
-    elif (( i % 3 == 0 )); then
+    elif [ $((count%3)) = 0 ]
+    then
         echo "Fizz"
-    elif (( i % 5 == 0 )); then
+    elif [ $((count%5)) = 0 ]
+    then
         echo "Buzz"
     else
-        echo "$i"
+            echo "$count"
+    fi
+((count++))
 done
