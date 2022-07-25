@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-num=1
-for ($num -e 10);
-do
-   echo "Best School"
-done

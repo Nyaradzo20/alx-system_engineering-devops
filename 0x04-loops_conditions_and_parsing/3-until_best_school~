@@ -1,9 +1,0 @@
-#!/usr/bin/env bash
-#print using until
-counter=0
-until [ $counter -gt 5 ]
-do
-  echo "Best School"
-    ((counter++))
-    done
-    
