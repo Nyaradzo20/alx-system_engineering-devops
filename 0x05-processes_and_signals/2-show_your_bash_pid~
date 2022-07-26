@@ -1,0 +1,4 @@
+ #!/usr/bin/env bash
+ #find pid of a word without using pgrep
+
+ps -auxf | grep bash

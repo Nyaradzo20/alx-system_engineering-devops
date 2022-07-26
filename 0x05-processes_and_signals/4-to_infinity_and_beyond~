@@ -1,0 +1,4 @@
+ #!/usr/bin/env bash
+ #In between each iteration of the loop, add a sleep 2
+ while :
+ do

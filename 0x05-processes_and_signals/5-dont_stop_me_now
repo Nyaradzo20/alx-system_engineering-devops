@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+#use kill to stop indefinate loops
+run=$(pgrep -f "4-to_infinity_and_beyond")
+if [ -n "$run" ]
+then
+    kill -15 "$run"
+fi
+     
