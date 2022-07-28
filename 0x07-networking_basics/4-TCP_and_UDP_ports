@@ -1,2 +1,4 @@
 #!/usr/bin/env bash
-sudo lsof -nP -iTCP -sTCP:LISTEN
+#show listening ports plus pid
+sudo netstat -pl
+#sudo lsof -nP -iTCP -sTCP:LISTEN
