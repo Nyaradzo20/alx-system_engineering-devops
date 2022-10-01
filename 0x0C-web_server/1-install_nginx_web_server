@@ -2,8 +2,7 @@
 #installing Nginx on web
 #should listen to prt 80
 
-sudo apt-get -y upgrade
-sudo apt-get -y update
+1-install_nginx_web_serversudo apt-get -y update
 sudo apt-get -y install nginx
+echo "Hello World!" | sudo tee /usr/share/nginx/html/index.html
 sudo service nginx start
-echo "Hello World!" | sudo tee /usr/share/nginx/html/hello.html
