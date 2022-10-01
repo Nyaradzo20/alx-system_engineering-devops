@@ -1,9 +1,8 @@
 #!/usr/bin/env bash
-#installing Nginx on web
-#should listen to prt 80
+# install nginx web server on web-01 server
 
-sudo apt-get -y upgrade
 sudo apt-get -y update
 sudo apt-get -y install nginx
-sudo service nginx start
-echo "Hello World!" | sudo tee /usr/share/nginx/html/hello.html
+sudo ufw allow 'Nginx HTTP'
+sudo echo "Hello World" | sudo tee /var/www/html/index.html 
+sudo service nginx restart
