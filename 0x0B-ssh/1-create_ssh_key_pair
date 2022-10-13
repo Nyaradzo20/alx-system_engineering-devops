@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+#Create RSA key
+#set passsword to betty
+#set name to school
+ssh-keygen -b 4096 -f school -N betty
