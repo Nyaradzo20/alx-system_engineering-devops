@@ -1,1 +1,1 @@
-variables and expansion
+This directory contains shell variables expansions basics
