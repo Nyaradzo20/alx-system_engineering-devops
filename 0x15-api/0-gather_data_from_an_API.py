@@ -1,32 +1,33 @@
 #!/usr/bin/python3
-
 """
-   Write a Python script that, using this REST API, for a give   n employee ID, returns information about his/her TODO list    progress.
+Using https://jsonplaceholder.typicode.com
+returns info about employee TODO progress
+Implemented using recursion
 """
+import re
 import requests
 import sys
 
-if __name__ == "__main__":
-     number_completed_todos = 0
-     number_of_todos = 0
-     completed_tasks = []
-     users_url = 'https://jsonplaceholder.typicode.com/users/'
-     user_url = users_url + sys.argv[1]
-     user_infos = requests.get(user_url).json()
-     user_name = user_infos.get("name")
-     user_todos_url = users_url + sys.argv[1] + '/todos/'
-     user_todos = requests.get(user_todos_url).json()
 
-     for user_todo in user_todos:
-         number_of_todos += 1
-         if (user_todo.get("completed") is True):
-             number_completed_todos += 1
-             completed_tasks.append(user_todo.get("title"))
+API = "https://jsonplaceholder.typicode.com"
+"""REST API url"""
 
-     print("Employee {} is done with tasks({}/{}):".format(
-                user_name,
-                number_completed_todos,
-                number_of_todos
-                ))
-     for task in completed_tasks:
-                  print("\t {}".format(task))
+
+if __name__ == '__main__':
+    if len(sys.argv) > 1:
+        if re.fullmatch(r'\d+', sys.argv[1]):
+            id = int(sys.argv[1])
+            user_res = requests.get('{}/users/{}'.format(API, id)).json()
+            todos_res = requests.get('{}/todos'.format(API)).json()
+            user_name = user_res.get('name')
+            todos = list(filter(lambda x: x.get('userId') == id, todos_res))
+            todos_done = list(filter(lambda x: x.get('completed'), todos))
+            print(
+                'Employee {} is done with tasks({}/{}):'.format(
+                    user_name,
+                    len(todos_done),
+                    len(todos)
+                )
+            )
+            for todo_done in todos_done:
+                print('\t {}'.format(todo_done.get('title')))
