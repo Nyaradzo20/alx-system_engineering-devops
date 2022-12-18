@@ -1,18 +1,18 @@
 #!/usr/bin/env bash
-# displays information about subdomains
 # shellcheck disable=SC2086
-func() {
-		IP=$( dig $1.$2  | grep -oE "\b([0-9]{1,3}\.){3}[0-9]{1,3}\b" | head -1 )
-		ANS=$( dig $1.$2 | grep -A1 'ANSWER SECTION:' | tail -1 )
-		REC=$( awk '{ print $4 }' <<< $ANS )
-		echo "The subdomain $1 is a $REC record and points to $IP"
+# display information about subdomains
+
+display_info ()
+{
+    domain="$1"
+    subdomain="$2"
+    dig "$subdomain.$domain" | awk '/ANSWER SECTION:/{getline; printf "The subdomain %s is a %s record and points to %s\n", var, $4, $5}' var="$subdomain"
 }
-if (( $# == 1 ))
-then
-	func 'www' "$1"
-	func 'lb-01' "$1"
-	func 'web-01' "$1"
-	func 'web-02' "$1"
-else
-	func "$2" "$1"
-fi
+
+for subdomain in "www" "lb-01" "web-01" "web-02"
+do
+    if [ -z "$2" ] || [ "$2" == "$subdomain" ] ;
+    then
+	display_info "$1" "$subdomain"
+    fi
+done
